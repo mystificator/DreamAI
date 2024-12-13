@@ -17,9 +17,38 @@ const CreatePost = () => {
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const generateImage = () => {};
+  const generateImage = async () => {
+    if (form.prompt) {
+      try {
+        setGeneratingImg(true);
+        const response = await fetch("http://localhost:8080/api/v1/dreamAI", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            prompt: form.prompt,
+          }),
+        });
 
-  const handleSubmit = () => {};
+        const data = await response.json();
+        if (data.photo) {
+          setForm({ ...form, photo: `data:image/webp;base64,${data.photo}` }); // Use correct MIME type (e.g., webp or jpeg)
+        } else {
+          alert("Image generation failed!");
+        }
+      } catch (err) {
+        alert(`Failed to generate image: ${err.message}`);
+        console.log(err);
+      } finally {
+        setGeneratingImg(false);
+      }
+    } else {
+      alert("Please provide proper prompt");
+    }
+  };
+
+  const handleSubmit = () => { };
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
