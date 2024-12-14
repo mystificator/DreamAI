@@ -7,6 +7,7 @@ import { FormField, Loader } from "../components";
 
 const CreatePost = () => {
   const navigate = useNavigate();
+  const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:8080'
 
   const [form, setForm] = useState({
     name: "",
@@ -21,9 +22,7 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        console.log(import.meta.env.VITE_GENERATE_IMAGE_URL);
-        // Use http://localhost:8080 in local
-        const response = await fetch("https://dream-ai-server-jet.vercel.app/api/v1/dreamAI", {
+        const response = await fetch(`${BASE_URL}/api/v1/dreamAI`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -56,8 +55,7 @@ const CreatePost = () => {
     if (form.prompt && form.photo) {
       setLoading(true);
       try {
-        // Use http://localhost:8080 in local
-        const response = await fetch('https://dream-ai-server-jet.vercel.app/api/v1/post', {
+        const response = await fetch(`${BASE_URL}/api/v1/post`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

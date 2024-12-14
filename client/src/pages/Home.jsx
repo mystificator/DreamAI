@@ -19,13 +19,15 @@ const Home = () => {
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState(null);
+  const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:8080'
 
   const fetchPosts = async () => {
     setLoading(true);
 
     try {
       // Use http://localhost:8080 in local
-      const response = await fetch("https://dream-ai-server-jet.vercel.app/api/v1/post", {
+      console.log(`${BASE_URL}/api/v1/post`)
+      const response = await fetch(`${BASE_URL}/api/v1/post`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
