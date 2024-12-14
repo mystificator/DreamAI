@@ -10,7 +10,8 @@ dotenv.config();
 
 const app = express();
 const corsOptions = {
-  origin: 'https://dream-ai-nine.vercel.app',
+  origin: ["http://localhost:5173", "https://dream-ai-nine.vercel.app"],
+  methods: ["GET", "POST"]
 }
 
 app.use(cors(corsOptions));
