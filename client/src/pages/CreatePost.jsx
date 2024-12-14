@@ -21,7 +21,8 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch(import.meta.env.VITE_GENERATE_IMAGE_URL || "http://localhost:8080/api/v1/dreamAI", {
+        console.log(import.meta.env.VITE_GENERATE_IMAGE_URL);
+        const response = await fetch("https://dream-ai-server-jet.vercel.app/api/v1/dreamAI", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -54,7 +55,7 @@ const CreatePost = () => {
     if (form.prompt && form.photo) {
       setLoading(true);
       try {
-        const response = await fetch(import.meta.env.VITE_POST_IMAGE_URL || 'http://localhost:8080/api/v1/post', {
+        const response = await fetch('https://dream-ai-server-jet.vercel.app/api/v1/post', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
