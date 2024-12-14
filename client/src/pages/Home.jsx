@@ -24,6 +24,7 @@ const Home = () => {
     setLoading(true);
 
     try {
+      // Use http://localhost:8080 in local
       const response = await fetch("https://dream-ai-server-jet.vercel.app/api/v1/post", {
         method: 'GET',
         headers: {
