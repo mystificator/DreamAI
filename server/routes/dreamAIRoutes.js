@@ -6,7 +6,7 @@ import FormData from 'form-data';
 dotenv.config();
 
 const router = express.Router();
-const STABILITY_API_URL = 'https://api.stability.ai/v2beta/stable-image/generate/core';
+const STABILITY_API_URL = process.env.STABILITY_API_URL;
 const apiKey = process.env.STABILITY_API_KEY;
 
 router.route("/").get((req, res) => {
